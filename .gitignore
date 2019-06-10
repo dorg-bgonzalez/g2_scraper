@@ -1,0 +1,4 @@
+#ignore vscode config file
+.vscode/*
+#ignore DS file
+.DS_Store
