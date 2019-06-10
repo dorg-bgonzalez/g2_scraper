@@ -111,8 +111,12 @@ print('finished writing to file')
 
 def paginated(url):
     html =  get_request(url)
-    parsed_html  = BeautifulSoup(html,"html.parser").find('a', {'class':'pagination__named-link'})
+    parsed_html = BeautifulSoup(html,"html.parser").find('a', {'class':'pagination__named-link'})
     if html != None and parsed_html != None:
-        print('products paginated')
+        #xtract the data from all the pages of products
+        pagination_section = BeautifulSoup(html, "html.parser").select_one('ul.pagination.text-center.branded-pagination')
+        last_number = int(pagination_section('li')[-1].a['href'].split('page=')[1][0])
+        for i in range(last_number):
+            print i
     else:
-        print('no pagination')
+        #no pagination follow the same scraping method
